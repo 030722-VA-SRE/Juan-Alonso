@@ -1,0 +1,8 @@
+Write a basic bash script
+
+ie: installing java/maven/git to an ec2
+
+after signing into ec2:
+
+suko yum update -y
+sudo yum install git

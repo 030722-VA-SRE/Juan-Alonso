@@ -14,30 +14,35 @@ import models.Items;
 public class ItemPostgres implements ItemDao {
 	
 	
-//	@Override
-//	public List<Items> getAllItems() {
-//		String sql = "select * from items;";
-//		List<Items> items = new ArrayList<>();
-//		
-//		try (Connection u = ConnectionUtil.getConnectionFromEnv()){
-//			Statement s = u.createStatement();
-//			ResultSet rs = s.executeQuery(sql);
-//			
-//			while (rs.next()) {
-//				Items newItem = new Items();
-//				newItem.setId(rs.getInt("id"));
-//				newItem.setItemName(rs.getString("itemName"));
-//				newItem.setValue(rs.getInt("value"));
-//				newItem.setDescription(rs.getString("description"));
-//				
-//				items.add(newItem);
-//			}
-//			} catch (SQLException e) {
-//				e.printStackTrace();
-//			}
-//		 return items;
-//	}
+	//WUP
+	
+	@Override
+	public List<Items> getAllItems() {
+		
+		String sql = "select * from items;";
+		List<Items> itemArr = new ArrayList<>();
+		
+		try (
+			Connection u = ConnectionUtil.getConnectionFromEnv()){
+			Statement s = u.createStatement();
+			ResultSet rs = s.executeQuery(sql);
+			
+			while (rs.next()) {
+				Items item = new Items();
+				item.setId(rs.getInt("id"));
+				item.setItemName(rs.getString("item_name"));
+				item.setValue(rs.getInt("value"));
+				item.setDescription(rs.getString("description"));
+				
+				itemArr.add(item);
+			}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		 return itemArr;
+	}
 
+	//WOP
 	
 	@Override
 	public Items getItembyId(int id) {
@@ -71,26 +76,160 @@ public class ItemPostgres implements ItemDao {
 				//if item of that id is found, returns that item, else returns null
 		return item;
 	}
+	
+	
+	
+	@Override
+	public int addItem(Items newItem) {
+		// TODO Auto-generated method stub
+		int newID = -1;
+		String sql = "insert into items (item_name, value, description) values (?, ?, ?) returning id;";
+		
+		try (Connection u = ConnectionUtil.getConnectionFromEnv()){
+			PreparedStatement ps = u.prepareStatement(sql);
+			
+			
+			ps.setString(1, newItem.getItemName());
+			ps.setInt(2, newItem.getValue());
+			ps.setString(3, newItem.getDescription());
+			
+			
+			ResultSet rs = ps.executeQuery();
+				
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return newID;
+	}
 
-//	@Override
-//	public int addItem(Items newItem) {
-//		// TODO Auto-generated method stub
-//		return 0;
-//	}
-//
-//	@Override
-//	public boolean updateItem(Items item) {
-//		// TODO Auto-generated method stub
-//		return false;
-//	}
-//
-//	@Override
-//	public boolean deleteItem(int id) {
-//		// TODO Auto-generated method stub
-//		return false;
-//	}
+
+
+	@Override
+	public boolean deleteItem(int id) {
+		// TODO Auto-generated method stub
+		
+		String sql = "delete from items where id = ?;";
+		
+		try (Connection u = ConnectionUtil.getConnectionFromEnv()){
+			PreparedStatement ps = u.prepareStatement(sql);
+			ps.setInt(1, id);
+			ps.execute();
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return true;
+			
+	}
+	
+	//1-itemname
+	//2-value
+	//3-description
+	//4-id
+	
+	@Override
+	public boolean updateItem(Items item) {
+		// TODO Auto-generated method stub
+		String sql = "update items set item_name = ?, value = ?, description = ? where id = ?;";
+		
+	
+		try (Connection u = ConnectionUtil.getConnectionFromEnv()){
+			PreparedStatement ps = u.prepareStatement(sql);
+			
+			ps.setString(1, item.getItemName());
+			ps.setInt(2, item.getValue());
+			ps.setString(3, item.getDescription());
+			ps.setInt(4, item.getId());
+			
+			int ss = ps.executeUpdate();
+			
+			if (ss == 0) {
+				return false;
+			} else 
+				return true;
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+	
+	public List<Items> getItemsByValue(int value){
+		String sql = "select * from items where value = ?;";
+		List<Items> items = new ArrayList<>();
+		
+		try (Connection u = ConnectionUtil.getConnectionFromEnv()){
+			PreparedStatement ps = u.prepareStatement(sql);
+			
+			ps.setInt(1, value);
+			ResultSet rs = ps.executeQuery();
+			
+			while (rs.next()) {
+				Items newItem = new Items();
+				newItem.setId(rs.getInt("id"));
+				newItem.setItemName(rs.getString("item_name"));
+				newItem.setDescription(rs.getString("description"));
+				
+				items.add(newItem);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return items;
+	}
+	
+	public List<Items> getItemsByName(String item_name) {
+		String sql = "select * from items where item_name = '%?%';";
+		List<Items> items = new ArrayList<>();
+		
+		try (Connection u = ConnectionUtil.getConnectionFromEnv()){
+			PreparedStatement ps = u.prepareStatement(sql);
+			
+			ps.setString(1, item_name);
+			ResultSet rs = ps.executeQuery();
+			
+			while (rs.next()) {
+				Items newItem = new Items();
+				newItem.setId(rs.getInt("id"));
+				newItem.setValue(rs.getInt("value"));
+				newItem.setDescription(rs.getString("description"));
+				
+				items.add(newItem);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return items;
+	}
 	
 	
+	public List<Items> getItemsbyNameAndValue(String item_name, int value) {
+		String sql = "select * from items where item_name = '%?%' and value = ?;";
+		List<Items> items = new ArrayList<>();
+		
+		try (Connection u = ConnectionUtil.getConnectionFromEnv()){
+			PreparedStatement ps = u.prepareStatement(sql);
+			
+			ps.setInt(1, value);
+			ResultSet rs = ps.executeQuery();
+			
+			while (rs.next()) {
+				Items newItem = new Items();
+				newItem.setId(rs.getInt("id"));
+				newItem.setDescription(rs.getString("description"));
+				
+				items.add(newItem);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return items;
+	}
 	
 	
 	

@@ -1,0 +1,86 @@
+AWS
+Cloud / AWS Overview
+How would you describe AWS? What is "the cloud" or "cloud computing" and why is it so popular now?
+	-Amazon Web Services
+		-offer cloud solutions, as in outside premise, for whatever needs a company may need.
+		-provides access to servers, storage, databases and application services over the internet
+Define Infrastructure, Platform, and Software as a Service
+	-Infrastructure aaS
+		- Services where users only need to provide and manage application, data, runtime env. middleware and OS
+	-Platform aaS
+		- users only need to provide application and data
+	-Software as a Service
+		- everything is abstracted
+
+What's the difference between a Region and an Availability Zone (AZ)?
+	-Regions are groupings of AWS zones avilable worldwide
+	-Availability zones are data centers containing infrastructure
+
+How are you charged for using AWS services? Does it vary by service?
+	-You are charged on a per-use-basis and it varies by service and requirements
+
+Different ways to interact with AWS services?
+	-Using one of the following
+		-AWS Management Console - simple webo-based user interface
+		-A command line interface - installed to acecess Amazon RDS API interactively
+		-programmitcally, using an API
+
+EC2
+What are the configuration options for EC2?
+	-AWS Elastic Compute Cloud
+		-Allows users to rent virtual computers on wihich to run their own computer applications	
+	-Config options:
+		-Engine options
+		-versions
+		-templates
+		-DB instance identifiers
+
+What are the different EC2 instance sizes/types?
+	Many different instance types that serve:
+		-General purpose
+		-Compute Optimized
+		-Memory Optimized
+		-Accelaerated Computing
+		-Storage Optimized
+
+
+Once you create an EC2, how to connect to it?
+1) On AWS Management console, go to EC2 > Instances > click on instance that was just configured. CLick connect > SSH Client
+2) Open command prompt(gitbash)
+3) Run the provided command given as example.
+4) Run Yes > should connect to EC2 instance.	
+
+What are Security Groups? When defining a rule for a security group, what 3 things do you need to specify?
+	- A security group acts as a firewall for your EC2 instances to control incoming and outgoing traffic based on their IP address.
+	-When defining a rule for a security group, you need to specify:
+		-Protocol
+		-Port Range
+		-ICMP Type
+		-Source or destination
+
+What's the difference between scalability, elasticity, and resiliency?
+	-Elasticity
+		- The ability to increase/decrease capacity in relation to instances.
+	-Scalability
+		- Ability to maintain application availability as required for larger capacity of instances.
+	-Resiliency
+		- The ablity for a cloud service to continue operations without going down (In the case of AWS over 99% reliablity).
+
+Ways of paying for EC2?
+	-On-demand
+	-Savings Plans
+	-Reserved Instances
+	-Spot instances
+	-Can pay for a dedicated host
+
+RDS
+What's an RDS?
+	-A relational Database Service is a service that makes it easier to set up, operate, and scale a relational database in the (AWS) cloud.
+
+Which vendors are supported?
+-Amazon Aurora
+-MySQL
+-MariaDB
+-Oracle
+-SQL Server
+-PostgreSQL
