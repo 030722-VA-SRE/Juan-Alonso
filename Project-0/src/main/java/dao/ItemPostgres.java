@@ -12,10 +12,7 @@ import ConnectionUtil.ConnectionUtil;
 import models.Items;
 
 public class ItemPostgres implements ItemDao {
-	
-	
-	//WUP
-	
+		
 	@Override
 	public List<Items> getAllItems() {
 		
@@ -42,11 +39,10 @@ public class ItemPostgres implements ItemDao {
 		 return itemArr;
 	}
 
-	//WOP
 	
 	@Override
 	public Items getItembyId(int id) {
-		// TODO Auto-generated method stub
+		
 		String sql = "select * from items where id = ?;";
 		Items item = null;
 		
@@ -57,7 +53,7 @@ public class ItemPostgres implements ItemDao {
 			
 			ps.setInt(1, id);
 			
-				//Execute query from the ps, assigning the db's query result to result set
+				//Execute query from the ps, assigning the db's query result to result set rs
 			ResultSet rs = ps.executeQuery();
 			
 			
@@ -66,17 +62,15 @@ public class ItemPostgres implements ItemDao {
 					item.setId(rs.getInt("id"));
 					item.setItemName(rs.getString("item_name"));
 					item.setValue(rs.getInt("value"));
-					item.setDescription(rs.getString("description"));
-					
+					item.setDescription(rs.getString("description"));			
 					
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-				//if item of that id is found, returns that item, else returns null
 		return item;
 	}
-	
+	 
 	
 	
 	@Override
@@ -92,8 +86,7 @@ public class ItemPostgres implements ItemDao {
 			ps.setString(1, newItem.getItemName());
 			ps.setInt(2, newItem.getValue());
 			ps.setString(3, newItem.getDescription());
-			
-			
+						
 			ResultSet rs = ps.executeQuery();
 				
 			
@@ -102,7 +95,7 @@ public class ItemPostgres implements ItemDao {
 		}
 		return newID;
 	}
-
+ 
 
 
 	@Override
@@ -124,14 +117,9 @@ public class ItemPostgres implements ItemDao {
 			
 	}
 	
-	//1-itemname
-	//2-value
-	//3-description
-	//4-id
-	
 	@Override
 	public boolean updateItem(Items item) {
-		// TODO Auto-generated method stub
+		// Updates item on specified ID
 		String sql = "update items set item_name = ?, value = ?, description = ? where id = ?;";
 		
 	
@@ -170,6 +158,7 @@ public class ItemPostgres implements ItemDao {
 				Items newItem = new Items();
 				newItem.setId(rs.getInt("id"));
 				newItem.setItemName(rs.getString("item_name"));
+				newItem.setValue(rs.getInt("value"));
 				newItem.setDescription(rs.getString("description"));
 				
 				items.add(newItem);
@@ -182,7 +171,7 @@ public class ItemPostgres implements ItemDao {
 	}
 	
 	public List<Items> getItemsByName(String item_name) {
-		String sql = "select * from items where item_name = '%?%';";
+		String sql = "select * from items where item_name = ?;";
 		List<Items> items = new ArrayList<>();
 		
 		try (Connection u = ConnectionUtil.getConnectionFromEnv()){
@@ -194,6 +183,7 @@ public class ItemPostgres implements ItemDao {
 			while (rs.next()) {
 				Items newItem = new Items();
 				newItem.setId(rs.getInt("id"));
+				newItem.setItemName(rs.getString("item_name"));
 				newItem.setValue(rs.getInt("value"));
 				newItem.setDescription(rs.getString("description"));
 				
@@ -208,18 +198,22 @@ public class ItemPostgres implements ItemDao {
 	
 	
 	public List<Items> getItemsbyNameAndValue(String item_name, int value) {
-		String sql = "select * from items where item_name = '%?%' and value = ?;";
+		String sql = "select * from items where item_name = ? and value = ?;";
 		List<Items> items = new ArrayList<>();
 		
 		try (Connection u = ConnectionUtil.getConnectionFromEnv()){
 			PreparedStatement ps = u.prepareStatement(sql);
 			
-			ps.setInt(1, value);
+			ps.setString(1, item_name);
+			ps.setInt(2, value);
+ 			
 			ResultSet rs = ps.executeQuery();
 			
 			while (rs.next()) {
 				Items newItem = new Items();
 				newItem.setId(rs.getInt("id"));
+				newItem.setItemName(rs.getString("item_name"));
+				newItem.setValue(rs.getInt("value"));
 				newItem.setDescription(rs.getString("description"));
 				
 				items.add(newItem);

@@ -1,0 +1,35 @@
+ 18:50:54.720 [main] ERROR control.Driver - logger has been set up.
+19:03:14.217 [main] ERROR  - Testing Logger
+19:07:36.844 [main] INFO   - Testing Logger
+19:20:30.679 [main] INFO   - Testing Logger
+19:24:13.620 [JettyServerThreadPool-21] INFO   - Item search performed
+19:26:45.452 [JettyServerThreadPool-21] INFO   - Item search performed
+19:29:50.791 [JettyServerThreadPool-20] ERROR  - Invalid id search performed for id 10
+19:34:40.846 [JettyServerThreadPool-28] INFO   - Item with name Items [id=0, item name=Recovery Heart, value=10description=Will instantly refill one Heart Container.]created
+19:38:23.422 [JettyServerThreadPool-30] INFO   - Item id [0] with name [Recovery Heart] created
+19:39:44.073 [JettyServerThreadPool-31] INFO   - Item with name [Recovery Heart] created
+19:45:29.442 [JettyServerThreadPool-31] INFO   - Testing: 1 Recovery Heart
+19:45:30.599 [JettyServerThreadPool-31] INFO   - Testing(2): 1 Recovery Heart
+20:29:36.926 [main] INFO   - App was launched.
+20:30:15.836 [JettyServerThreadPool-30] INFO   - Search for item id [1performed.
+20:30:40.540 [main] INFO   - App was launched.
+20:30:47.018 [JettyServerThreadPool-30] INFO   - Search for item id [1] performed.
+20:31:01.059 [JettyServerThreadPool-21] ERROR  - Invalid id search performed for id [5].
+20:31:01.062 [JettyServerThreadPool-21] ERROR  - Exception was thrown: Exceptions.ItemNotFoundException
+13:12:59.750 [main] INFO   - App was launched.
+13:13:19.273 [JettyServerThreadPool-30] INFO   - Item search performed
+13:13:37.032 [JettyServerThreadPool-20] INFO   - Search for item id [10] performed.
+13:13:43.362 [JettyServerThreadPool-28] INFO   - Item search performed
+13:13:59.557 [JettyServerThreadPool-24] INFO   - Item [Recovery Heart] created.
+16:44:44.302 [main] INFO   - App was launched.
+16:44:52.425 [JettyServerThreadPool-30] INFO   - Item search performed
+20:51:27.774 [main] INFO   - App was launched.
+20:51:33.120 [JettyServerThreadPool-30] INFO   - Item search performed
+20:51:50.097 [JettyServerThreadPool-18] INFO   - Search for item id [3] performed.
+20:51:54.556 [JettyServerThreadPool-28] INFO   - Search for item id [5] performed.
+20:52:59.312 [JettyServerThreadPool-24] INFO   - Item [Recovery Heart] created.
+20:53:10.962 [JettyServerThreadPool-24] INFO   - Item search performed
+20:53:30.899 [JettyServerThreadPool-28] INFO   - Item id [2] deleted
+20:53:36.285 [JettyServerThreadPool-24] ERROR  - Invalid id search performed for id [2].
+20:53:36.286 [JettyServerThreadPool-24] ERROR  - Exception was thrown: Exceptions.ItemNotFoundException
+20:53:44.714 [JettyServerThreadPool-28] INFO   - Item search performed

@@ -24,6 +24,13 @@ public class Items {
 		this.description = description;
 	}
 	
+	public Items(int id, String itemName, int value, String description) {
+		this();
+		this.id = id;
+		this.itemName = itemName;
+		this.value = value;
+		this.description = description;
+	}
 	
 	
 	

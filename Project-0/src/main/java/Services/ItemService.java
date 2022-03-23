@@ -7,6 +7,9 @@ import dao.ItemDao;
 import dao.ItemPostgres;
 import models.Items;
 
+
+//Class handles business logic
+
 public class ItemService {
 	
 	private ItemDao itDao;
@@ -28,10 +31,6 @@ public class ItemService {
 		return item;
 	}
 	
-
-	
-	
-	
 	public List<Items> getAllItems() throws ItemNotFoundException {
 		List<Items> items = itDao.getAllItems();
 		
@@ -42,17 +41,10 @@ public class ItemService {
 	}
 	
 	
-	
-	
 	public boolean addItem(Items newItem) {
-		
-		int genID = newItem.getId();
-		
-		if (genID == newItem.getId()) {
-			itDao.addItem(newItem);
-		};
-		return true;
-				
+			itDao.addItem(newItem); 
+			
+		return true;		
 	}
 	
 	public boolean deleteItem(int id) {
@@ -60,13 +52,13 @@ public class ItemService {
 	}
 	
 	public boolean updateItem(Items item) {
-		return itDao.updateItem(item);
+		itDao.updateItem(item);
+		return true;
 	}
 	
 	public List<Items> getItemsByValue(int value) {
 		return itDao.getItemsByValue(value);
 	}
-	
 	public List<Items> getItemsByName(String item_name) {
 		return itDao.getItemsByName(item_name);
 	}
