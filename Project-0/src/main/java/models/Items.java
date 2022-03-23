@@ -60,7 +60,7 @@ public class Items {
 	}
 	@Override
 	public String toString() {
-		return "Items [id=" + id + ", item name=" + itemName + ", value=" + value + "description=" + description + "]";
+		return "Items [id=" + id + ", itemName=" + itemName + ", value=" + value + "description=" + description + "]";
 	}
 	@Override
 	public int hashCode() {

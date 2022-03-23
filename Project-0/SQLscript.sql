@@ -8,7 +8,7 @@ description varchar(100) not null
 );
 
 
-
+	--IF CHANGES ARE MADE, MAKE SURE CONSOLE REPO MATCHES FOR UNIT TESTING
 insert into items(item_name, value, description) values 
 	('Deku Stick', 10, 'A long branch gathered from the Great Deku Tree.'),
 	('Deku Seeds', 30, 'Can be used as slingshot ammo. Set of 30.'),
@@ -19,7 +19,9 @@ insert into items(item_name, value, description) values
 	('Magic Bean', 100, 'These beans are magical! Only for sale to bean experts.'),
 	('Bombchu', 50, 'These are small bombs that run along the ground.'),
 	('Milk', 20, 'Heals you for 8 hearts. Contains 2 servings. Need an empty bottle to carry.'),
-	('Chateau Romani', 200, 'Vintage milk produced by specially-bred cows. Need an empty bottle.'),
+	('Chateau Romani', 200, 'Vintage milk produced by specially-bred cows. Need an empty bottle.');
+
+
 	('Red Potion', 25, 'Refills your health entirely. Need an empty bottle to carry.'),
 	('Green Potion', 20, 'Refills your magic. Need an empty bottle to carry.'),
 	('Blue Potion', 60, 'Refills both your health and magic. Need an empty bottle to carry.');

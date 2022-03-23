@@ -75,7 +75,6 @@ public class Driver {
 		});
 		
 		
-		
 				//GET item by id
 		
 		app.get("items/{id}", (ctx) -> {
