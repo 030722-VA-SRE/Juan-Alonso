@@ -63,7 +63,7 @@ public class ItemService {
 		return itDao.getItemsByName(item_name);
 	}
 	public List<Items> getItemsbyNameAndValue(String item_name, int value) throws ItemNotFoundException {
-		
+	
 //		List<Items> items = itDao.getItemsbyNameAndValue(item_name, value);
 //		
 //		if (items == null) {

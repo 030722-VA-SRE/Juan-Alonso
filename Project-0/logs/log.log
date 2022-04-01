@@ -38,3 +38,25 @@
 00:53:21.322 [JettyServerThreadPool-31] INFO   - Item search performed
 00:53:31.171 [JettyServerThreadPool-18] INFO   - Search for item id [4] performed.
 00:53:33.728 [JettyServerThreadPool-28] INFO   - Search for item id [7] performed.
+08:03:37.009 [main] INFO   - App was launched.
+08:46:48.366 [main] INFO   - App was launched.
+08:47:37.394 [JettyServerThreadPool-30] INFO   - Item search performed
+08:50:07.966 [JettyServerThreadPool-20] INFO   - Item search performed
+08:58:47.562 [JettyServerThreadPool-33] INFO   - Item ID 1 updated to Item Name Heart Container.
+08:58:56.444 [JettyServerThreadPool-30] INFO   - Item search performed
+09:00:01.948 [JettyServerThreadPool-18] INFO   - Item id [2] deleted
+09:00:14.626 [JettyServerThreadPool-38] INFO   - Item ID 1 updated to Item Name Heart Container.
+09:15:46.173 [main] INFO   - App was launched.
+09:22:09.984 [main] INFO   - App was launched.
+09:29:11.357 [main] INFO   - App was launched.
+09:43:02.834 [JettyServerThreadPool-30] INFO   - Item search performed
+09:43:25.319 [JettyServerThreadPool-18] INFO   - Search for item id [3] performed.
+09:43:30.477 [JettyServerThreadPool-28] INFO   - Search for item id [4] performed.
+09:44:28.983 [JettyServerThreadPool-24] INFO   - Item search performed
+09:44:38.343 [JettyServerThreadPool-28] INFO   - Item ID 1 updated to Item Name Heart Container.
+09:44:44.502 [JettyServerThreadPool-24] INFO   - Item search performed
+09:44:57.262 [JettyServerThreadPool-28] INFO   - Item id [2] deleted
+09:45:01.674 [JettyServerThreadPool-24] INFO   - Item id [3] deleted
+09:45:06.340 [JettyServerThreadPool-28] INFO   - Item search performed
+09:46:00.890 [JettyServerThreadPool-30] INFO   - Item [Blue Potion] created.
+09:46:07.222 [JettyServerThreadPool-32] INFO   - Item search performed

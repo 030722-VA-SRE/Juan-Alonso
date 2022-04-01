@@ -4,7 +4,8 @@ create table if not exists items(
 id serial primary key,
 item_name varchar(20) not null,
 value integer not null,
-description varchar(100) not null 
+description varchar(100) not null
+--userSelected varchar (20) unique
 );
 
 
@@ -30,6 +31,14 @@ insert into items(item_name, value, description) values
 
 
 -----------------------------------------------------------------------
+
+create table if not exists users(
+id serial primary key,
+username varchar(20) not null unique,
+password varchar(20) not null);
+
+
+
 //used to test adding and restarting id serial sequence 
 
 delete from items where id = 5;

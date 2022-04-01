@@ -56,7 +56,7 @@ public class ItemServiceTest {
 //		
 //		System.out.println(dItems);
 //		System.out.println(remItems);
-//		if (dItems != remItems) {
+//		if (dItems == remItems) {
 //			itemDeleted = false;
 //		} else {itemDeleted = true;}
 //		assertEquals(true, itemDeleted);
@@ -69,7 +69,7 @@ public class ItemServiceTest {
 //		boolean itemAdded = svc.addItem(items.get(0));
 //		assertEquals(true, itemAdded);
 //	}
-	
+//	
 	@Test
 	public void testGetAllItems() throws ItemNotFoundException {
 		List<Items> rItems = svc.getAllItems();
@@ -83,22 +83,22 @@ public class ItemServiceTest {
 	}
  
 
-//	@AfterAll
-//	@Test
-//	public static void testUpdateItem() throws ItemNotFoundException {
-//		boolean updatedItem = false;
-//		Items updatingItem = items.get(0);
-//		updatingItem.setItemName("Null Item");
-//		
-//		if (svc.updateItem(updatingItem)) {
-//			updatedItem = true;
-//			System.out.println(svc.getByID(1));
-//		} else {
-//			updatedItem = false;
-//		}
-//		
-//		assertEquals(true, updatedItem);		
-//	}
+	@AfterAll
+	@Test
+	public static void testUpdateItem() throws ItemNotFoundException {
+		boolean updatedItem = false;
+		Items updatingItem = items.get(0);
+		updatingItem.setItemName("Null Item");
+		
+		if (svc.updateItem(updatingItem)) {
+			updatedItem = true;
+			System.out.println(svc.getByID(1));
+		} else {
+			updatedItem = false;
+		}
+		
+		assertEquals(true, updatedItem);		
+	}
 	
 	//When getting from console repo, index - 1
 	//////
