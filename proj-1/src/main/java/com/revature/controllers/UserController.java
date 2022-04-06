@@ -2,6 +2,9 @@ package com.revature.controllers;
 
 import java.util.List;
 
+import org.jboss.logging.MDC;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -27,16 +30,25 @@ import com.revature.services.UserService;
 public class UserController {
 
 	private UserService us;
-
+	private static final Logger LOG = LoggerFactory.getLogger(UserController.class);
+	
 	@Autowired
 	public UserController(UserService us) {
 		super();
 		this.us = us;
 	}
 	
+//	@GetMapping
+//	public ResponseEntity<List<User>> getAll() {
+//		
+//		LOG.info("Testing: Full User Search");
+//		return new ResponseEntity<>(us.getAll(), HttpStatus.OK);
+//	}
+	
 	@GetMapping
-	public ResponseEntity<List<User>> getAll() {
-		return new ResponseEntity<>(us.getAll(), HttpStatus.OK);
+	public ResponseEntity<List<UserDTO>> getUsers() {
+		LOG.info("All users HTTP Request");
+		return new ResponseEntity<>(us.getUsers(),HttpStatus.OK);
 	}
 	
 	@GetMapping("/{id}")
@@ -44,6 +56,7 @@ public class UserController {
 		
 		//if token is null, not if it has correct value
 		if (token == null) {
+			LOG.info("Invalid sign-in attempted");
 			return new ResponseEntity<>(HttpStatus.FORBIDDEN);
 		}
 			return new ResponseEntity<>(us.getUserById(id), HttpStatus.OK);

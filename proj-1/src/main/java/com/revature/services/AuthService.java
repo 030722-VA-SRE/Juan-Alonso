@@ -32,6 +32,8 @@ public class AuthService {
 	
 	public String generateToken(UserDTO principal) {
 		//logic to create a token
+		//needs better implementation for a token
+		
 		return principal.getId() + ":" +principal.getUsername();
 	}
 	

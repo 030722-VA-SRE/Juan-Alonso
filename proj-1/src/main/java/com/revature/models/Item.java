@@ -29,7 +29,7 @@ public class Item {
 	
 	
 	@ManyToOne
-	@JoinColumn(nullable = false, name="customer")
+	@JoinColumn(nullable = true, name="customer")
 	private User userSelected;
 
 

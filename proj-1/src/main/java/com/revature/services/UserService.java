@@ -1,9 +1,12 @@
 package com.revature.services;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.transaction.Transactional;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,13 +20,15 @@ import com.revature.repositories.UserRepository;
 @Service
 public class UserService {
 
+	private static final Logger LOG = LoggerFactory.getLogger(UserService.class); 
+	
 	@Autowired
 	private UserRepository ur;
 	private ItemRepository ir;
 	
 	
 	public UserService(UserRepository ur, ItemRepository ir) {
-		super();
+		super(); 
 		this.ur = ur;
 		this.ir = ir;
 	}
@@ -43,9 +48,23 @@ public class UserService {
 		
 	}
 	
-	public List<User> getAll(){
-		return ur.findAll();
+	
+//	public List<User> getAll(){
+//		return ur.findAll();
+//	}
+	
+	
+	//Returns users of role ADMIN
+	public List<UserDTO> getUsers() {
+		List<User> users = ur.findAll();
+		
+		List<UserDTO> userDto = users.stream()
+//				.filter(user -> user.getRole().toString().equals("ADMIN"))
+				.map((user) -> new UserDTO(user))
+				.collect(Collectors.toList());
+		return userDto;
 	}
+	
 	
 	@Transactional
 	public User updateUser(int id, User user) {
