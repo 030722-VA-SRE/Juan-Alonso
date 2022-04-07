@@ -34,6 +34,22 @@ public class ItemService {
 		return item;
 	}
 
+	public List<Item> getItemByValue(int value) {
+		// TODO Auto-generated method stub
+		if (ir.findItemByValue(value).isEmpty()) {
+			throw new ItemNotFoundException();
+		}
+		return ir.findItemByValue(value);
+	}
+
+	public List<Item> getItemByItemName(String item_name) {
+		// TODO Auto-generated method stub
+		if (ir.findItemByItemName(item_name).isEmpty()) {
+			throw new ItemNotFoundException();
+		}
+		return ir.findItemByItemName(item_name);
+	}
+	
 	@Transactional
 	public Item createItem(Item newItem) {
 		return ir.save(newItem);
@@ -56,6 +72,8 @@ public class ItemService {
 		getItemById(id);	
 		ir.deleteById(id);
 	}
+
+
 	
 	
 	

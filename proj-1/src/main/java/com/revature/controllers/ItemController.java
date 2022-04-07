@@ -2,6 +2,9 @@ package com.revature.controllers;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.slf4j.MDC;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,6 +16,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.revature.dto.UserDTO;
@@ -21,11 +25,12 @@ import com.revature.exceptions.UserNotFoundException;
 import com.revature.models.Item;
 import com.revature.models.User;
 import com.revature.services.ItemService;
+import com.revature.services.UserService;
 
 @RestController
 @RequestMapping("/items")
 public class ItemController {
-
+	private static final Logger LOG = LoggerFactory.getLogger(ItemController.class);
 	private ItemService is;
 
 	@Autowired
@@ -35,15 +40,26 @@ public class ItemController {
 		// TODO Auto-generated constructor stub
 	}
 	
+
 	@GetMapping
-	public ResponseEntity<List<Item>> getAll() {
-		return new ResponseEntity<>(is.getAll(), HttpStatus.OK);
+	public ResponseEntity<List<Item>> getAll(@RequestParam(name="value", required=false) Integer value, @RequestParam(name="item_name",required=false)String item_name) {
+		
+		if (value != null) {
+			return new ResponseEntity<>(is.getItemByValue(value), HttpStatus.OK);
+		}
+		if (item_name != null) {
+			return new ResponseEntity<>(is.getItemByItemName(item_name),HttpStatus.OK);
+		}
+		LOG.info("Full item search performed");
+		return new ResponseEntity<>(is.getAll(),HttpStatus.OK);
 	}
+	
+	
 	
 	@PostMapping
 	public ResponseEntity<String> createItem(@RequestBody Item item/*, @RequestHeader String header*/) {
 		Item i = is.createItem(item);
-		return new ResponseEntity<>("Item " + i.getItem_name() + " was created.", HttpStatus.CREATED);
+		return new ResponseEntity<>("Item " + i.getItemName() + " was created.", HttpStatus.CREATED);
 	}
 	
 	@GetMapping("/{id}")
@@ -58,11 +74,13 @@ public class ItemController {
 	}
 	
 	@DeleteMapping("/{id}")
-	public ResponseEntity<String> deleteUser(@PathVariable("id") int id) throws ItemNotFoundException {
+	public ResponseEntity<String> deleteItem(@PathVariable("id") int id) throws ItemNotFoundException {
 		is.deleteItem(id);
 		return new ResponseEntity<>("Item deleted", HttpStatus.OK);
 	}
 	
+	
+
 	
 	
 	

@@ -20,7 +20,7 @@ public class Item {
 	private int id;
 	
 	@Column(nullable=false)
-	private String item_name;
+	private String itemName;
 	
 	@Column(nullable=false)
 	private int value;
@@ -49,13 +49,13 @@ public class Item {
 	}
 
 
-	public String getItem_name() {
-		return item_name;
+	public String getItemName() {
+		return itemName;
 	}
 
 
-	public void setItem_name(String item_name) {
-		this.item_name = item_name;
+	public void setItemName(String itemName) {
+		this.itemName = itemName;
 	}
 
 
@@ -91,7 +91,7 @@ public class Item {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(description, id, item_name, userSelected, value);
+		return Objects.hash(description, id, itemName, userSelected, value);
 	}
 
 
@@ -105,14 +105,14 @@ public class Item {
 			return false;
 		Item other = (Item) obj;
 		return Objects.equals(description, other.description) && id == other.id
-				&& Objects.equals(item_name, other.item_name) && Objects.equals(userSelected, other.userSelected)
+				&& Objects.equals(itemName, other.itemName) && Objects.equals(userSelected, other.userSelected)
 				&& value == other.value;
 	}
 
 
 	@Override
 	public String toString() {
-		return "Item [id=" + id + ", item_name=" + item_name + ", value=" + value + ", description=" + description
+		return "Item [id=" + id + ", itemName=" + itemName + ", value=" + value + ", description=" + description
 				+ ", userSelected=" + userSelected + "]";
 	}
 	

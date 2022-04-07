@@ -1,6 +1,7 @@
 package com.revature.controllers;
 
 import java.util.List;
+import java.util.UUID;
 
 import org.jboss.logging.MDC;
 import org.slf4j.Logger;
@@ -21,8 +22,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.revature.dto.UserDTO;
+import com.revature.exceptions.AuthorizationException;
 import com.revature.exceptions.UserNotFoundException;
 import com.revature.models.User;
+import com.revature.services.AuthService;
 import com.revature.services.UserService;
 
 @RestController
@@ -30,12 +33,14 @@ import com.revature.services.UserService;
 public class UserController {
 
 	private UserService us;
+	private AuthService as;
 	private static final Logger LOG = LoggerFactory.getLogger(UserController.class);
 	
 	@Autowired
-	public UserController(UserService us) {
+	public UserController(UserService us, AuthService as) {
 		super();
 		this.us = us;
+		this.as = as;
 	}
 	
 //	@GetMapping
@@ -46,21 +51,32 @@ public class UserController {
 //	}
 	
 	@GetMapping
-	public ResponseEntity<List<UserDTO>> getUsers() {
+	public ResponseEntity<List<UserDTO>> getUsers(@RequestHeader(value = "Authorization", required = false) String token) throws AuthorizationException {
+		
+		MDC.put("requestId", UUID.randomUUID().toString());
+		as.verify(token);
+		
 		LOG.info("All users HTTP Request");
 		return new ResponseEntity<>(us.getUsers(),HttpStatus.OK);
 	}
 	
 	@GetMapping("/{id}")
-	public ResponseEntity<UserDTO> getById(@PathVariable("id") int id, @RequestHeader("Authorization") String token) {
+	public ResponseEntity<UserDTO> getUserById(@PathVariable("id") int id, @RequestHeader("Authorization") String token) {
 		
 		//if token is null, not if it has correct value
 		if (token == null) {
-			LOG.info("Invalid sign-in attempted");
+			LOG.warn("Invalid user tried to access /users/id");
 			return new ResponseEntity<>(HttpStatus.FORBIDDEN);
 		}
-			return new ResponseEntity<>(us.getUserById(id), HttpStatus.OK);
+		
+		MDC.put("userToken", token);
+		UserDTO u = us.getUserById(id);
+		MDC.clear();
+			return new ResponseEntity<>(u, HttpStatus.OK);
 	}
+	
+	
+	
 	
 	@PostMapping
 	public ResponseEntity<String> createUser(@RequestBody User user/*, @RequestHeader String header*/) {

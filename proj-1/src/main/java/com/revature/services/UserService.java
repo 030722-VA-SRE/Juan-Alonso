@@ -7,6 +7,7 @@ import javax.transaction.Transactional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.slf4j.MDC;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -36,6 +37,7 @@ public class UserService {
 
 	public UserDTO getUserById(int id) throws UserNotFoundException {
 		User user = ur.findById(id).orElseThrow(UserNotFoundException::new);
+		LOG.info(MDC.get("userToken"));
 		return new UserDTO(user);
 	}
 	
@@ -54,12 +56,13 @@ public class UserService {
 //	}
 	
 	
-	//Returns users of role ADMIN
+	
+	
 	public List<UserDTO> getUsers() {
 		List<User> users = ur.findAll();
 		
 		List<UserDTO> userDto = users.stream()
-//				.filter(user -> user.getRole().toString().equals("ADMIN"))
+//				.filter(user -> user.getRole().toString().equals("ADMIN"))    //Returns users of role ADMIN/USER
 				.map((user) -> new UserDTO(user))
 				.collect(Collectors.toList());
 		return userDto;
@@ -68,16 +71,17 @@ public class UserService {
 	
 	@Transactional
 	public User updateUser(int id, User user) {
-		//log for update user
-		//check if exists
+		//check if exists logic needed here TODO
+		
+		LOG.info("User id " + ur.getById(id) + " updated.");
 		return ur.save(user);
 	}
 	
 	@Transactional
-	public void deleteUser(int id) throws UserNotFoundException {
-		
+	public void deleteUser(int id) throws UserNotFoundException {	
 		getUserById(id);
 		
+		LOG.info("User id " + ur.getById(id) + " deleted.");
 		ur.deleteById(id);
 	}
 	
