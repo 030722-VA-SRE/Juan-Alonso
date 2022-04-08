@@ -35,7 +35,7 @@ public class ItemController {
 	private static final Logger LOG = LoggerFactory.getLogger(ItemController.class);
 	private ItemService is;
 	private AuthService as;
-
+	
 	@Autowired
 	public ItemController(ItemService is) {
 		super();
@@ -72,8 +72,8 @@ public class ItemController {
 			return new ResponseEntity<>(HttpStatus.FORBIDDEN);
 		}
 		MDC.put("requestId", UUID.randomUUID().toString());
-		as.verify(token);
-		
+//		as.verify(token);
+	
 		LOG.info("Item id " + id + "updated.");
 		return new ResponseEntity<>(is.updateItem(id, item), HttpStatus.CREATED);
 	}
@@ -89,7 +89,7 @@ public class ItemController {
 //			return new ItemNotFoundException();
 //		}
 		MDC.put("requestId", UUID.randomUUID().toString());
-		as.verify(token);
+//		as.verify(token);
 		
 		is.deleteItem(id);
 		LOG.info("Item id " + id + " deleted.");
@@ -103,7 +103,7 @@ public class ItemController {
 			return new ResponseEntity<>(HttpStatus.FORBIDDEN);
 		}
 		MDC.put("requestId", UUID.randomUUID().toString());
-		as.verify(token);
+//		as.verify(token);
 		
 		Item i = is.createItem(item);
 		LOG.info("Item id: " + i.getId() + ", Item: " + i.getItemName() + " created.");

@@ -25,7 +25,7 @@ public class AuthService {
 		super();
 		this.ur = ur;
 	}
-	
+ 
 	
 	public String login(String username, String password) {
 		User user = ur.findUserByUsername(username);

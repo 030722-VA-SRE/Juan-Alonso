@@ -26,13 +26,10 @@ public class UserService {
 	
 	@Autowired
 	private UserRepository ur;
-	private ItemRepository ir;
-	
-	
-	public UserService(UserRepository ur, ItemRepository ir) {
+
+	public UserService(UserRepository ur) {
 		super(); 
 		this.ur = ur;
-		this.ir = ir;
 	}
 	
 

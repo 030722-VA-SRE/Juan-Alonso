@@ -4,7 +4,7 @@ services:
   proj-1:
     build: .
     ports:
-      - 8090:8080
+      - 8081:8080
     environment:
       - DB_URL=jdbc:postgresql://postgres:5432/postgres
       - DB_USER=postgres
