@@ -37,6 +37,16 @@ public class Item {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+	
+	public Item(int id, String itemName, int value, String description, User userSelected) {
+		super();
+		this.id = id;
+		this.itemName = itemName;
+		this.value = value;
+		this.description = description;
+		this.userSelected = userSelected;
+	}
+
 
 
 	public int getId() {

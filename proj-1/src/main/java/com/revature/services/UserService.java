@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.slf4j.MDC;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestHeader;
 
 import com.revature.dto.UserDTO;
 import com.revature.exceptions.UserAlreadyExistsException;
@@ -70,8 +71,8 @@ public class UserService {
 	
 	
 	@Transactional
-	public User updateUser(int id, User user) {
-		//check if exists logic needed here TODO
+	public User updateUser(int id, User user, @RequestHeader(value = ("Authorization"), required = true)String token) {
+		
 		
 		LOG.info("User id " + ur.getById(id) + " updated.");
 		return ur.save(user);

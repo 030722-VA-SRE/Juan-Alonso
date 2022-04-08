@@ -1,6 +1,6 @@
 insert into users (username, password, role) values ('maskSalesman', 'abcde', 'ADMIN');
 insert into users (username, password, role) values ('zoraMikau', 'fghij', 'USER');
-
+insert into users (username, password, role) values ('heroLink', '12345', 'USER');
 
 
 insert into items (item_name, value, description, customer) values ('Deku Stick', 10, 'A long branch gathered from the Great Deku Tree.', 2);

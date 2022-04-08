@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.transaction.Transactional;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,15 +19,14 @@ import com.revature.repositories.UserRepository;
 
 @Service
 public class ItemService {
-
+	private static final Logger LOG = LoggerFactory.getLogger(ItemService.class);
 	@Autowired
-	private UserRepository ur;
+	
 	private ItemRepository ir;
 	
 	
-	public ItemService(UserRepository ur, ItemRepository ir) {
+	public ItemService(ItemRepository ir) {
 		super();
-		this.ur = ur;
 		this.ir = ir;
 	}
 	
@@ -61,21 +62,16 @@ public class ItemService {
 	
 	@Transactional
 	public Item updateItem(int id, Item item) {
-		//log for update item
-		//check if exists
+		Item ph = ir.findById(id).orElseThrow(ItemNotFoundException::new);
+		item.setId(ph.getId());
+		
 		return ir.save(item);
 	}
 	
 	@Transactional
 	public void deleteItem(int id) throws ItemNotFoundException {
-	
 		getItemById(id);	
 		ir.deleteById(id);
-	}
-
-
-	
-	
-	
+	}	
 	
 }

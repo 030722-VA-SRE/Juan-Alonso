@@ -1,3 +1,7 @@
+security:
+ ignored: /**
+ basic:
+  enabled: false
 server:
   port: 8090
 spring:
@@ -12,10 +16,13 @@ spring:
      ddl-auto: create
       # ddl-auto: create allows us to create schema in our postgres container db     
 management:
+ security:
+  enabled: false
  endpoints:
     web:
       exposure:
         include: health, metrics, prometheus
+
 # metrics:
 #   distribution:
 #     percentiles-histogram.http.server.requests: true

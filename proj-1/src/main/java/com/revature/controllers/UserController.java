@@ -76,22 +76,46 @@ public class UserController {
 	}
 	
 	
-	
-	
 	@PostMapping
-	public ResponseEntity<String> createUser(@RequestBody User user/*, @RequestHeader String header*/) {
+	public ResponseEntity<String> createUser(@RequestBody User user, @RequestHeader(value="Authorization", required=true)String token) {
+		if (token == null) {
+			LOG.warn("Unauthorized user: CREATE user denied");
+			return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+		}
+		MDC.put("requestId", UUID.randomUUID().toString());
+		as.verify(token);
+		
 		User u = us.createUser(user);
+		LOG.info("User " + u.getUsername() + " created.");
 		return new ResponseEntity<>("User " + u.getUsername() + " was created.", HttpStatus.CREATED);
 	}
 	
 	@PutMapping("/{id}")
-	public ResponseEntity<User> updateUser(@RequestBody User user, @PathVariable("id") int id) {
-		return new ResponseEntity<>(us.updateUser(id,user), HttpStatus.CREATED);
+	public ResponseEntity<User> updateUser(@RequestBody User user, @PathVariable("id") int id, 
+										@RequestHeader(value="Authorization", required=true)String token) {
+		if (token == null) {
+			LOG.warn("Unauthorized user: UPDATE user denied");
+			return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+		}
+		MDC.put("requestId", UUID.randomUUID().toString());
+		as.verify(token);
+		
+		LOG.info("User id " + id + " updated.");		//token added
+		return new ResponseEntity<>(us.updateUser(id,user, token), HttpStatus.ACCEPTED);
 	}
 	
 	@DeleteMapping("/{id}")
-	public ResponseEntity<String> deleteUser(@PathVariable("id") int id) throws UserNotFoundException {
+	public ResponseEntity<String> deleteUser(@PathVariable("id") int id, @RequestHeader(value="Authorization", required=true)String token) 
+																												throws UserNotFoundException {
+		if (token == null) {
+			LOG.warn("Unauthorized user: DELETE user denied");
+			return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+		}
+		MDC.put("requestId", UUID.randomUUID().toString());
+		as.verify(token);
+		
 		us.deleteUser(id);
+		LOG.info("User id " + id + " deleted.");
 		return new ResponseEntity<>("User deleted", HttpStatus.OK);
 	}
 	
